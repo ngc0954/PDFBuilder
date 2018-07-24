@@ -1,0 +1,47 @@
+#fileUploader {
+    display: none;
+  }
+
+  /* .btn:focus, .upload-btn:focus{
+    outline: 0 !important;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    background-color: #4791D2;
+  }
+  
+  body {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  .row {
+    margin-top: 80px;
+  } */
+  
+  .upload-btn {
+    color: #ffffff;
+    background-color: #F89406;
+    border: none;
+  }
+  
+  .upload-btn:hover,
+  .upload-btn:focus,
+  .upload-btn:active,
+  .upload-btn.active {
+    color: #ffffff;
+    background-color: #FA8900;
+    border: none;
+  }
+
+  #divPDFContent{
+    max-height: 3508px;
+    max-width: 2480px;
+    overflow: scroll;
+    min-width: 56%;
+    /* width: 2480px;
+    height: 3508px; */
+  }
+    

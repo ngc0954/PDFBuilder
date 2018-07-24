@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PDF Builder</title>    
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar pd0 navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid pd0 mr0">
+        <a class="navbar-brand pd0" href="#"><img src="./assets/Images/logo.png" alt="Logo" title="Logo" width="250" /></a>
+        
+        <!-- BEGIN PAGE TOP -->
+		<div class="page-top">
+
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<button type="submit" value="Create New PDF" class="newpdf_btn">Create New PDF</button>
+					<button type="submit" value="Save as Draft" class="draftpdf_btn">Save as Draft</button>
+					<li><a href="#">Help</a></li>
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown dropdown-user dropdown-dark ">
+						<a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+							<span class="username username-hide-on-mobile"> Welcome User </span>
+							<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+							<img alt="" class="img-circle" src="./assets/Images/user.png" /> </a>
+						<ul class="dropdown-menu dropdown-menu-default">
+							<li>
+								<a href="#">My Profile</a>
+							</li>
+
+							<li>
+								<a href="login.html">Log Out</a>
+							</li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+			</div>
+			<!-- END TOP NAVIGATION MENU -->
+</div>
+	  </div>
+    </nav> 
+
+    <!-- Page Contentiner Fluid Start -->
+    <div class="container-fluid">
+
+      <div class="row">
+		
+		<!-- Drag and Drop Controls Start -->
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pd0 mr0 ">
+			
+			<div class="controls resolution">
+				
+				<h6>Drag and Drop Controls</h6>
+				
+				<div class="drag">
+					<label id="lbl" >Text</label>
+					<img id="lblTxt" draggable="true" (dragstart)="drag($event)" src="./assets/Images/text.png" alt="Text" /><br><span>Text</span>
+				</div>
+				<div class="drag">
+					<img id="lblImage" draggable="true" (dragstart)="drag($event)" src="./assets/Images/image.png" alt="Text" /><br><span>Image</span>
+				</div>
+				<div class="drag">
+					<img id="lblHeading" draggable="true" (dragstart)="drag($event)" src="./assets/Images/heading.png" alt="Text" /><br><span>Heading</span>
+				</div>
+				<div class="drag">
+					<img src="./assets/Images/table.png" alt="Text" /><br><span>Grid</span>
+				</div>
+				<div class="drag">
+					<img id="lblTable" draggable="true" (dragstart)="drag($event)"  src="./assets/Images/grid.png" alt="Text" /><br><span>Table</span>
+				</div>
+				<div class="drag">
+					<img src="./assets/Images/button.png" alt="Text" /><br><span>Button</span>
+				</div>
+			</div>
+        </div>
+        <!-- Drag and Drop Controls End -->
+		  
+		<!-- PDF Content Start -->
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pdfcontent resolution">
+
+			<div (drop)="drop($event)"  (dragover)="allowDrop($event)" class="page pdfresolution">
+				<!-- PDF Content Placed Here.... -->
+			</div>
+			<button type="submit" value="Generate"  class="generetepdf">Generate PDF</button>
+
+        </div>
+        <!-- PDF Content End -->
+		  
+		<!-- Properties Section Start -->		  
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pd0 mr0">
+			<div class="properties resolution">
+				<h6>Choose Properties</h6>
+				
+				<div class="admin-form">
+					
+					<!-- Window Size Start -->
+					<div class="section col-md-12 ">
+						<span class="title">Select Window Size</span>
+						<label class="field select">
+							<select id="selectID1" name="selectID">
+								<option value="">A4 (Default Size)</option>
+								<option value="1">A2</option>
+								<option value="2">A3</option>
+								<option value="3">A6</option>
+							</select>
+							<i class="arrow double"></i>
+						</label>
+					</div>
+					<!-- Window Size End -->
+					
+					<div class="section col-md-12">
+						<span class="title">Font Formatting</span>
+					</div>
+					
+					<!-- Font Family Start -->
+					<div class="section col-md-12">
+						<label class="field select">
+							<select id="selectID2" name="selectID">
+								<option value="">Select Font-Family</option>
+								<option value="1">Arial</option>
+								<option value="2">Thahoma</option>
+								<option value="3">Verdana</option>
+							</select>
+							<i class="arrow double"></i>
+						</label>
+					</div>
+					<!-- Font Family End -->
+					
+					<!-- Font size Start -->
+					<div class="section col-md-12">
+						<label class="field select ">
+								<select id="selectID3" name="selectID">
+									<option value="">Font-Size</option>
+									<option value="1">10pt</option>
+									<option value="2">11pt</option>
+									<option value="3">12pt</option>
+									<option value="1">14pt</option>
+									<option value="2">16pt</option>
+									<option value="3">18pt</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+					</div>
+					<!-- Font size End -->
+					
+					<!-- Font Style Start -->
+					<div class="section col-md-12">
+						<label class="field select">
+								<select id="selectID" name="selectID">
+									<option value="">Font-Style</option>
+									<option value="1">Normal</option>
+									<option value="2">Bold</option>
+									<option value="3">Italic</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+					
+					<!-- Font Style End -->
+					
+					<!-- Font Color start-->
+					<div class="col-md-12">
+						<label class="field">
+							<input placeholder="Select Font-Color" class="gui-input" id="from" name="from" type="text">
+						</label>
+					</div>
+					<!-- Font Color End -->
+					
+					<!-- Margins Start -->
+					<div class="col-md-12">
+						<label class="field">Margin</label>
+					</div>
+					<div class="cols4">
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="top" class="gui-input" id="from2" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Right" class="gui-input" id="from3" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Bottom" class="gui-input" id="from4" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Left" class="gui-input" id="from5" name="from">
+							</label>
+						</div>
+					</div>
+					
+					<!-- Margins End -->
+					
+					<!-- Paddings Start -->
+					<div class="col-md-12">
+						<label class="field">Padding</label>
+					</div>
+					<div class="cols4">
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="top" class="gui-input" id="from2" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Right" class="gui-input" id="from3" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Bottom" class="gui-input" id="from4" name="from">
+							</label>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<label class="field">
+								<input type="text" placeholder="Left" class="gui-input" id="from5" name="from">
+							</label>
+						</div>
+					</div>
+					<!-- Paddings End -->
+					
+					<div class="section col-md-12">
+						<span class="title">Paragraph</span>
+					</div>
+					
+					<!-- Alignement Start -->
+					<div class="section col-md-12">
+						<label class="field select">
+							<select id="selectID5" name="selectID">
+								<option value="">Select Alignment</option>
+								<option value="1">Left</option>
+								<option value="2">Center</option>
+								<option value="3">Right</option>
+							</select>
+							<i class="arrow double"></i>
+						</label>
+					</div>
+					<!-- Alignement End -->
+					
+					<!-- Line Height Start -->
+					<div class="section col-md-12">
+						<label class="field select">
+							<select id="selectID4" name="selectID">
+								<option value="">Select Line Height</option>
+								<option value="1">1.0</option>
+								<option value="2">1.5</option>
+								<option value="3">2</option>
+							</select>
+							<i class="arrow double"></i>
+						</label>
+					</div>
+					<!-- Line Height End -->
+					
+				</div>
+				
+				
+			</div>
+          
+        </div>
+		<!-- Properties Section End -->
+
+      </div>
+
+    </div>
+    <!-- /.container Fluid End-->
+
+    <!-- Footer Start-->
+    <footer class="bg-dark footer">
+      <div class="container-fluid">
+		  <div class="pull-left pd0">Version 1.0    For Internal Use Only. Do Not Detail or Distribute to Any Third Parties.</div>
+		  <div class="pull-right pd0">© Sagarsoft , All Rights Reserved.</div>
+      </div>
+    </footer>
+    <!-- Footer Start-->
+    
+  </body>
+
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>PDF Builder</title>
+	<style>
+		
+    </style>
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar pd0 navbar-expand-lg navbar-light bg-light fixed-top">
+		<div class="container-fluid pd0 mr0">
+			<a class="navbar-brand pd0" href="#">
+				<img src="./assets/Images/logo.png" alt="Logo" title="Logo" width="250" />
+			</a>
+
+			<!-- BEGIN PAGE TOP -->
+			<div class="page-top">
+
+				<!-- BEGIN TOP NAVIGATION MENU -->
+				<div class="top-menu">
+					<ul class="nav navbar-nav pull-right">
+						<button type="submit" value="Create New PDF" class="newpdf_btn" (click)="openNewPage()">Create New PDF</button>
+						<!-- <button type="submit" value="Save as Draft" class="draftpdf_btn">Save as Draft</button> -->
+						<!-- <a [routerLink]="['/dynamic-table']"><button type="submit" value="Save as Draft" class="draftpdf_btn">Save as Draft</button></a> -->
+						<li>
+							<a href="#">Help</a>
+						</li>
+						<!-- BEGIN USER LOGIN DROPDOWN -->
+						<li class="dropdown dropdown-user dropdown-dark ">
+							<a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+								<span class="username username-hide-on-mobile"> Welcome User </span>
+								<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+								<img alt="" class="img-circle" src="./assets/Images/user.png" /> </a>
+							<ul class="dropdown-menu dropdown-menu-default">
+								<li>
+									<a href="#">My Profile</a>
+								</li>
+
+								<li>
+									<a href="login.html">Log Out</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END USER LOGIN DROPDOWN -->
+
+					</ul>
+				</div>
+				<!-- END TOP NAVIGATION MENU -->
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Contentiner Fluid Start -->
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<!-- Drag and Drop Controls Start -->
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pd0 mr0 ">
+
+				<div class="controls resolution">
+
+					<h6 id="headTagELE">Drag and Drop Controls</h6>
+
+					<div class="drag" id="Label" (dragover)="allowDrop($event)" draggable="true" (dragstart)="drag($event)">
+						<img id="Label" src="./assets/Images/text.png" alt="Text" draggable="true" (dragstart)="drag($event)"/>
+						<br>
+						<span>Text</span>
+					</div>
+					<div class="drag" id="Image" (dragover)="allowDrop($event)" draggable="true" (dragstart)="drag($event)">
+						<img id="Image" src="./assets/Images/image.png" alt="Text" draggable="true" (dragstart)="drag($event)" />
+						<br>
+						<span>Image</span>
+					</div>
+					<!-- <div class="drag" id="Heading" (drop)="drop($event)" (dragover)="allowDrop($event)">
+						<img id="Heading" src="./assets/Images/heading.png" alt="Text" draggable="true" (dragstart)="drag($event)" />
+						<br>
+						<span>Heading</span>
+					</div> -->
+					<div class="drag" id="Table" (dragover)="allowDrop($event)" draggable="true" (dragstart)="drag($event)">
+						<img id="Table" src="./assets/Images/grid.png" alt="Text" draggable="true" (dragstart)="drag($event)" />
+						<br>
+						<span>Table</span>
+					</div>
+					<div class="drag" style="display: none;">
+						<img src="./assets/Images/table.png" alt="Text" />
+						<br>
+						<span>Grid</span>
+					</div>
+					<div class="drag" style="display: none;">
+						<img src="./assets/Images/button.png" alt="Text" />
+						<br>
+						<span>Button</span>
+					</div>
+				</div>
+			</div>
+			<!-- Drag and Drop Controls End -->
+
+			<!-- PDF Content Start -->
+			<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pdfcontent resolution">
+
+				<div id="divPDFContent" class="page pdfresolution wrapper" (dragover)="allowDrop($event)" (drop)="drop($event)">
+					<div id=divpdf  style="border:1px solid;border-color: black" class=wrapper2></div>
+				</div>
+				<button type="button" value="Generate" (click)="generate()" class="generetepdf">Generate PDF</button>
+
+			</div>
+			<!-- PDF Content End -->
+
+			<!-- Properties Section Start -->
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pd0 mr0">
+				<div class="properties resolution">
+					<h6>Choose Properties</h6>
+
+					<div class="admin-form">
+
+						<!-- Window Size Start -->
+						<div class="section col-md-12 ">
+							<span class="title">Select Window Size</span>
+							<label class="field select">
+								<select id="selectID1" name="selectID">
+									<option value="">A4 (Default Size)</option>
+									<option value="1">A2</option>
+									<option value="2">A3</option>
+									<option value="3">A6</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+						<!-- Window Size End -->
+
+						<!-- File Upload Start-->
+						<div class="col-md-12">
+							<label class="field">
+								<button class="btn btn-lg upload-btn" type="button" (click)="uploadFile()" *ngIf='model.isImageFileUpload'>Upload File</button>
+								<input id="fileUploader" type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpeg,.jpg,.gif"
+								 class="gui-input" name="from">
+							</label>
+						</div>
+						<!-- File Upload End -->
+
+						<div class="section col-md-12">
+							<span class="title">Font Formatting</span>
+						</div>
+
+						<!-- Font Family Start -->
+						<div class="section col-md-12">
+							<label class="field select">
+								<select id="ddFontFamily" (change)="ddFontFamily()" name="selectID">
+									<option value="">Select Font-Family</option>
+									<option value="arial">Arial</option>
+									<option value="Thahoma">Thahoma</option>
+									<option value="Verdana">Verdana</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+						<!-- Font Family End -->
+
+						<!-- Font size Start -->
+						<!-- <div class="section col-md-12">
+							<label class="field select ">
+								<select id="ddFontSize" (change)=ddFontSize() name="selectID">
+									<option value="">Font-Size</option>
+									<option value="10px">10pt</option>
+									<option value="11px">11pt</option>
+									<option value="12px">12pt</option>
+									<option value="14px">14pt</option>
+									<option value="16px">16pt</option>
+									<option value="18px">18pt</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div> -->
+						<!-- Font size End -->
+
+
+
+						<!-- Font Style Start -->
+						<div class="section col-md-12">
+							<label class="field select">
+								<select id="ddFontStyle" (change)="ddFontStyle()" name="selectID">
+									<option value="">Font-Style</option>
+									<option value="normal">Normal</option>
+									<option value="bold">Bold</option>
+									<option value="italic">Italic</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+						<!-- Font Style End -->
+
+						<!-- Font size Start -->
+						<div class="section col-md-12 ">
+							<span class="title">Font size</span>
+							<label class="field">
+								<input placeholder="" class="gui-input" (focusout)="setFontSize()" (keypress)="setFontsizeEnter($event)" style="display: block"
+								 id="txtFontSize" name="from" type="text">
+							</label>
+						</div>
+						<!-- Font size End -->
+
+						<!-- Font Color start-->
+						<div class="col-md-12">
+							<label class="field">
+								<span class="title">Select Color</span>
+								<!-- <input placeholder="Select Font-Color"  class="gui-input" id="divFontColor" (change)="setFontColor()" name="from" type="text"> -->
+								<input type="color" placeholder="Select Font-Color" id="txtFontColor" (change)="setFontColor()" class="gui-input" name="from">
+							</label>
+						</div>
+						<!-- Font Color End -->
+
+						<!-- Width -->
+						<!-- <div class="section col-md-12 ">
+							<span class="title">Width</span>
+							<label class="field">
+								<input placeholder="" class="gui-input" (focusout)="setWidth()" (keypress)="setWidthEnter($event)" style="display: block"
+								 id="txtWidth" name="from" type="text">
+							</label>
+							<span class="title">Height</span>
+							<label class="field">
+								<input placeholder="" class="gui-input" (focusout)="setHeight()" (keypress)="setHeightEnter($event)" style="display: block"
+								 id="txtHeight" name="from" type="text">
+							</label>
+						</div> -->
+						<!-- Width Size End -->
+						<!-- Margins Start -->
+						<!-- <div class="col-md-12">
+							<label class="field">Margin</label>
+						</div>
+						<div class="cols4">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="top" (focusout)="setMarginTop()" (keypress)="setMarginTopEnter($event)" class="gui-input" id="marginTop" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Right" (focusout)="setMarginRight()" (keypress)="setMarginRightEnter($event)" class="gui-input" id="marginRight" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Bottom" (focusout)="setMarginBottom()" (keypress)="setMarginBottomEnter($event)" class="gui-input" id="marginBottom" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Left" (focusout)="setMarginLeft()" (keypress)="setMarginLeftEnter($event)" class="gui-input" id="marginLeft" name="from">
+								</label>
+							</div>
+						</div> -->
+
+						<!-- Margins End -->
+
+						<!-- Paddings Start -->
+						<!-- <div class="col-md-12">
+							<label class="field">Padding</label>
+						</div>
+						<div class="cols4">
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="top" (focusout)="setPaddingTop()" class="gui-input" id="paddingTop" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Right" (focusout)="setPaddingRight()" class="gui-input" id="paddingRight" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Bottom" (focusout)="setPaddingBottom()" class="gui-input" id="paddingBottom" name="from">
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<label class="field">
+									<input type="text" placeholder="Left" (focusout)="setPaddingLeft()" class="gui-input" id="paddingLeft" name="from">
+								</label>
+							</div>
+						</div> -->
+						<!-- Paddings End -->
+
+						<div class="section col-md-12">
+							<span class="title">Paragraph</span>
+						</div>
+
+						<!-- Alignement Start -->
+						<div class="section col-md-12">
+							<label class="field select">
+								<select id="ddAlignment" (change)="ddAlignment()" name="selectID">
+									<option value="">Select Alignment</option>
+									<option value="left">Left</option>
+									<option value="center">Center</option>
+									<option value="right">Right</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+						<!-- Alignement End -->
+
+						<!-- Line Height Start -->
+						<div class="section col-md-12">
+							<label class="field select">
+								<select id="ddLineHeight" (change)="ddLineHeight()" name="selectID">
+									<option value="">Select Line Height</option>
+									<option value="1">1.0</option>
+									<option value="2">1.5</option>
+									<option value="3">2</option>
+								</select>
+								<i class="arrow double"></i>
+							</label>
+						</div>
+						<!-- Line Height End -->
+
+						<!-- Delete a control start-->
+						<div class="col-md-12">
+							<label class="field">
+								<button class="btn btn-lg upload-btn" style="background: red" type="button" (click)="deleteControl()" >Delete</button>
+							</label>
+						</div>
+						<!-- Delete a control end -->
+						
+					</div>
+
+
+				</div>
+
+			</div>
+			<!-- Properties Section End -->
+
+		</div>
+
+	</div>
+	<!-- /.container Fluid End-->
+
+	<!-- Footer Start-->
+	<footer class="bg-dark footer">
+		<div class="container-fluid">
+			<div class="pull-left pd0">Version 1.0 For Internal Use Only. Do Not Detail or Distribute to Any Third Parties.</div>
+			<div class="pull-right pd0">© Sagarsoft , All Rights Reserved.</div>
+		</div>
+	</footer>
+	<!-- Footer Start-->
+
+</body>
+
+</html>

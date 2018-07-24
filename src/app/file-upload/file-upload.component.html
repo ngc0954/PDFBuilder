@@ -1,0 +1,9 @@
+<p>
+  file-upload works!
+</p>
+<div>
+  <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpeg,.jpg,.png,.gif">
+</div>
+<div style="padding: 20px;">
+  <img [attr.src]='model.uploadedImage' alt="Image" width="600" height="400">
+</div>

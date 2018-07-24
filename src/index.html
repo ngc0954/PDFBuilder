@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PDFToolAngular</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./assets/css/admin-forms.css">
+  <!-- Admin Forms CSS -->
+  <link rel="stylesheet"  href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <style>
+    .selectedClass {
+     border: 2px solid red !important; 
+    } 
+  </style>
+</head>
+
+<body hold-transition>
+  <app-root>Loading ...</app-root>
+</body>
+
+</html>
+<!-- Bootstrap core JavaScript -->
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/jquery-ui.min.js"></script>
+<script src="./assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="./assets/js/html2pdf.bundle.js"></script> -->
+<script src='./assets/js/html2pdf.js'></script>
+ <script src='./assets/js/jspdf.debug.js'></script>
+
+<!-- Script for adjust height depend upon screen resolutions -->
+<script>
+  $(window).resize(function () {
+    $('.resolution').height($(window).height() - 150);
+    $('.pdfresolution').height($(window).height() - 250);
+  });
+  $(window).trigger('resize');
+</script>
+<!-- Script for adjust height depend upon screen resolutions -->
